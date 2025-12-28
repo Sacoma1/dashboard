@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
+import { appwriteConfig, database } from "~/appwrite/client";
+import { AppwriteException } from "appwrite";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -48,7 +50,7 @@ export const calculateTrendPercentage = (
   if (countOfLastMonth === 0) {
     return countOfThisMonth === 0
       ? { trend: "no change", percentage: 0 }
-      : { trend: "increment", percentage: 100  };
+      : { trend: "increment", percentage: 100 };
   }
 
   const change = countOfThisMonth - countOfLastMonth;
@@ -67,4 +69,29 @@ export const formatKey = (key: keyof TripFormData) => {
   return key
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase());
+};
+
+export const registerUser = async (user:any) => {
+  try {
+    await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.usersCollectionId,
+      user.$id,
+      {
+        name: user.name,
+        email: user.email,
+        accountId: user.$id,
+        status: "admin",
+        imageUrl: "",
+      }
+    );
+    console.log("User save in database");
+  } catch (dbError) {
+    if (dbError instanceof AppwriteException) {
+      if (dbError.code !== 409) {
+        console.error(`error saving user`, dbError);
+      }
+    }
+  }
+  
 };
