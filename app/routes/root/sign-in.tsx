@@ -1,5 +1,4 @@
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
-import { registerUser } from "lib/utils";
 
 import { Link, redirect } from "react-router";
 import { loginWithGoogle } from "~/appwrite/auth";
@@ -8,10 +7,11 @@ import { account } from "~/appwrite/client";
 export async function clientLoader() {
   try {
     const user = await account.get();
-    if (!user.$id) return redirect("/");
-    await registerUser(user);
+
+    if (user.$id) return redirect("/");
+    
   } catch (e) {
-    return redirect("/");
+    console.log("Error fetching user", e);
   }
 }
 
