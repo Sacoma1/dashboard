@@ -1,6 +1,7 @@
 import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import Header from "components/Header";
 import type { Route } from "./+types/create-trip";
+import { selectItems } from "~/constants";
 
 export const loader = async () => {
   const response = await fetch(
@@ -18,6 +19,10 @@ export const loader = async () => {
 
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const handleSubmit = async () => {};
+  const handleChange = async (
+    key: keyof TripFormData,
+    value: string | number
+  ) => {};
   const countries = loaderData as Country[];
 
   const countryData = countries.map((country) => ({
@@ -36,10 +41,46 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
               id="country"
               dataSource={countryData}
               fields={{ text: "text", value: "value" }}
-              placeholder="Select a country"
+              placeholder="Select a Country"
               className="combo-box"
+              change={(e: { value: string | undefined }) => {
+                if (e.value) {
+                  handleChange("country", e.value);
+                }
+              }}
+              allowFiltering
+              filtering={(e) => {
+                const query = e.text.toLowerCase();
+
+                e.updateData(
+                  countries
+                    .filter((country) =>
+                      country.name.toLowerCase().includes(query)
+                    )
+                    .map((country) => ({
+                      text: country.name,
+                      value: country.value,
+                    }))
+                );
+              }}
             />
           </div>
+          <div>
+            <label htmlFor="duration">Duration</label>
+            <input
+              type="text"
+              id="duration"
+              name="duration"
+              placeholder="enter a number of days (5,12,...)"
+              className="form-input placeholder:text-gray-100"
+              onChange={(e) => handleChange("duration", Number(e.target.value))}
+            />
+          </div>
+          {selectItems.map((key) => (
+            <div key={key}>
+              <label htmlFor={key}>{key}</label>
+            </div>
+          ))}
         </form>
       </section>
     </main>
