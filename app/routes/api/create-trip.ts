@@ -75,7 +75,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const trip = parseMarkdownToJson(textResult.response.text());
 
     const imageResponse = await fetch(
-      `https://api.unsplash.com/search/photos?query=${country}${interests}${travelStyle}&client_id=${unsplashApiKey}`,
+      `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`,
     );
 
     const imageUrls = (await imageResponse.json()).results

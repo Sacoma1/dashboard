@@ -45,7 +45,7 @@ export function getFirstWord(input: string = ""): string {
 
 export const calculateTrendPercentage = (
   countOfThisMonth: number,
-  countOfLastMonth: number
+  countOfLastMonth: number,
 ): TrendResult => {
   if (countOfLastMonth === 0) {
     return countOfThisMonth === 0
@@ -71,7 +71,7 @@ export const formatKey = (key: keyof TripFormData) => {
     .replace(/^./, (str) => str.toUpperCase());
 };
 
-export const registerUser = async (user:any) => {
+export const registerUser = async (user: any) => {
   try {
     await database.createDocument(
       appwriteConfig.databaseId,
@@ -83,7 +83,7 @@ export const registerUser = async (user:any) => {
         accountId: user.$id,
         status: "admin",
         imageUrl: "",
-      }
+      },
     );
     console.log("User save in database");
   } catch (dbError) {
@@ -93,5 +93,4 @@ export const registerUser = async (user:any) => {
       }
     }
   }
-  
 };

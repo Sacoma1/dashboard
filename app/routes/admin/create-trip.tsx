@@ -134,7 +134,6 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     },
   ];
 
- 
   return (
     <main className="flex flex-col gap-10 pb-20 wrapper">
       <Header title="Add a new trip" description="View and edit travel plans" />
@@ -154,6 +153,18 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                 e.value && handleChange("country", e.value)
               }
               allowFiltering
+              filtering={(e) => {
+                const query = e.text.toLowerCase();
+
+                e.updateData(
+                  countries
+                    .filter((c) => c.name.toLocaleLowerCase().includes(query))
+                    .map((c) => ({
+                      text: c.name,
+                      value: c.value,
+                    })),
+                );
+              }}
             />
           </div>
 

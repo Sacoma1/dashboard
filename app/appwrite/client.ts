@@ -6,9 +6,8 @@ export const appwriteConfig = {
   apiKey: import.meta.env.VITE_APPWRITE_API,
   databaseId: import.meta.env.VITE_DATABASE_ID,
   usersCollectionId: import.meta.env.VITE_APPWRITE_USERS_COLLECTION,
+  tripsCollectionId: import.meta.env.VITE_APPWRITE_TRIPS_COLLECTION,
 };
-
-
 
 const client = new Client()
   .setEndpoint(appwriteConfig.endpointUrl)
