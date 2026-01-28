@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import Header from "components/Header";
 import { parseTripData } from "lib/utils";
 import { getAllTrips, getTripById } from "~/appwrite/trips";

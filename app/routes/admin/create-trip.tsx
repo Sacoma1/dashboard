@@ -1,3 +1,5 @@
+export const runtime = 'nodejs'
+
 import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import Header from "components/Header";
 import type { Route } from "./+types/create-trip";

@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { Query } from "appwrite";
 import { appwriteConfig, database } from "./client";
 

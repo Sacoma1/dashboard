@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import type { LoaderFunctionArgs } from "react-router";
 import { getAllTrips, getTripById } from "~/appwrite/trips";
 import type { Route } from "./+types/trip-detail";
@@ -185,35 +187,34 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             </div>
           </section>
         ))}
-       
       </section>
-       <section className="flex flex-col gap-6">
-          <h2 className="p-24-semibold text-dark-100">Popular trips</h2>
-          <div className="trip-grid">
-            {allTrips.map(
-              ({
-                id,
-                name,
-                location,
-                imageUrls,
-                itinerary,
-                interests,
-                travelStyle,
-                estimatedPrice,
-              }) => (
-                <TripCard
-                  key={id}
-                  id={id}
-                  name={name}
-                  imageUrl={imageUrls[0]}
-                  location={itinerary?.[0]?.location ?? ""}
-                  tags={[interests, travelStyle]}
-                  price={estimatedPrice}
-                />
-              ),
-            )}
-          </div>
-        </section>
+      <section className="flex flex-col gap-6">
+        <h2 className="p-24-semibold text-dark-100">Popular trips</h2>
+        <div className="trip-grid">
+          {allTrips.map(
+            ({
+              id,
+              name,
+              location,
+              imageUrls,
+              itinerary,
+              interests,
+              travelStyle,
+              estimatedPrice,
+            }) => (
+              <TripCard
+                key={id}
+                id={id}
+                name={name}
+                imageUrl={imageUrls[0]}
+                location={itinerary?.[0]?.location ?? ""}
+                tags={[interests, travelStyle]}
+                price={estimatedPrice}
+              />
+            ),
+          )}
+        </div>
+      </section>
     </main>
   );
 };

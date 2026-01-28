@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 
 import { parseTripData } from "lib/utils";
 import { database, appwriteConfig } from "./client";

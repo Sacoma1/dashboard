@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ID } from "appwrite";
 import { parseMarkdownToJson } from "lib/utils";

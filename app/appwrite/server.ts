@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { Client, Databases, Storage } from "appwrite";
 
 export const appwriteConfig = {
